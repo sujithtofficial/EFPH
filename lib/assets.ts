@@ -133,7 +133,7 @@ export const ASSETS = {
   galleryBanner: "/images/stock/gallery-banner.jpg",
 
   /* ─── Give / Offering ─────────────────────────────────────────────── */
-  giveBanner: "/images/stock/give-banner.jpg",
+  giveBanner: "/images/general/DSC02445.jpg",
 
   /* ─── Contact ─────────────────────────────────────────────────────── */
   contactBanner: "/images/stock/contact-banner.jpg",

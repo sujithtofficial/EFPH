@@ -42,7 +42,7 @@ const EVENTS = [
     time: "6:30 PM",
     venue: "Ebenezer Ministries",
     desc: "An evening of uninhibited, Spirit-filled worship — celebrating Jesus through song, dance, and testimony.",
-    image: ASSETS.giveBanner,
+    image: "/images/general/DSC02460.jpg",
   },
   {
     category: "Monthly",

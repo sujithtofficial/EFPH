@@ -100,7 +100,7 @@ export default function HomePage() {
             </motion.h1>
 
             <motion.p variants={fadeUp} className="text-gray-300/90 text-lg md:text-xl leading-relaxed mb-2 max-w-xl font-light">
-              We are a Christ centered church
+              We are a Christ centered ministry
             </motion.p>
 
             <motion.p variants={fadeUp} className="text-gray-300/90 text-lg md:text-xl leading-relaxed mb-10 max-w-xl font-light">
@@ -172,7 +172,7 @@ export default function HomePage() {
               We at Ebenezer Ministries welcome you to attend our life changing worship, listen to the mysteries of the word of God and fellowship with saints.
             </p>
             <p className="text-gray-600 leading-relaxed mb-8 text-[15px]">
-              We as a church are more like a family. We come together on Sundays to worship and celebrate Jesus. We explore the mysteries of His word to help people connect their lives to God and also help people connect their lives to <strong>CHRIST</strong>.
+              We are more like a family. We come together on Sundays to worship and celebrate Jesus. We explore the mysteries of His word to help people connect their lives to God and also help people connect their lives to <strong>CHRIST</strong>.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link href="/about" className="btn-gold">Learn More <ArrowRight size={16} /></Link>

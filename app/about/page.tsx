@@ -72,14 +72,18 @@ export default function AboutPage() {
       {/* ── Leadership ───────────────────────────────────────────── */}
       <section className="section-pad bg-cream-gradient relative overflow-hidden">
         <div className="absolute top-0 right-0 text-[200px] font-black text-[#c9a96e]/5 leading-none select-none pointer-events-none">E</div>
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-14">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <span className="eyebrow">Our Leaders</span>
             <h2 className="section-title mt-3">Leadership</h2>
-            <div className="gold-bar-center" />
-          </div>
+            <div className="gold-bar" />
 
-          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+          <div className="grid gap-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -114,6 +118,20 @@ export default function AboutPage() {
               </p>
             </motion.div>
           </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative h-[460px]"
+          >
+            <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.2)]">
+              <Image src={ASSETS.aboutImage2} alt="Church family" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e]/20 to-transparent" />
+            </div>
+          </motion.div>
         </div>
       </section>
 
