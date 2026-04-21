@@ -74,7 +74,6 @@ export default function Footer() {
                 ["Events", "/events"],
                 ["Live Stream", "/live"],
                 ["Gallery", "/gallery"],
-                ["Give Online", "/give"],
               ].map(([label, href]) => (
                 <li key={href}>
                   <Link href={href}
@@ -153,8 +152,6 @@ export default function Footer() {
             <Link href="/privacy-policy" className="hover:text-[#b0925e] transition-colors">Privacy Policy</Link>
             <span>·</span>
             <Link href="/terms" className="hover:text-[#b0925e] transition-colors">Terms &amp; Conditions</Link>
-            <span>·</span>
-            <Link href="/give" className="text-[#b0925e] hover:underline">Give Online</Link>
           </div>
         </div>
       </div>

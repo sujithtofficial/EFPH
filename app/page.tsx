@@ -100,7 +100,6 @@ export default function HomePage() {
             </motion.h1>
 
             <motion.p variants={fadeUp} className="text-gray-300/90 text-lg md:text-xl leading-relaxed mb-2 max-w-xl font-light">
-              We are a Christ centered church
             </motion.p>
 
             <motion.p variants={fadeUp} className="text-gray-300/90 text-lg md:text-xl leading-relaxed mb-10 max-w-xl font-light">
@@ -166,7 +165,7 @@ export default function HomePage() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <span className="eyebrow">Welcome Note</span>
-            <h2 className="section-title mt-3 mb-2">Come As You Are</h2>
+            <h2 className="section-title mt-3 mb-2">We Are a Christ Centered Church</h2>
             <div className="gold-bar" />
             <p className="text-gray-600 leading-relaxed mb-5 text-[15px]">
               We at Ebenezer Ministries welcome you to attend our life changing worship, listen to the mysteries of the word of God and fellowship with saints.
@@ -319,11 +318,6 @@ export default function HomePage() {
                 Submit Prayer Request <ArrowRight size={16} />
               </Link>
             </div>
-            {/* Subtle give link — minimal, non-pushy */}
-            <p className="mt-10 text-gray-600 text-sm">
-              Would you like to support the ministry?{" "}
-              <Link href="/give" className="link-underline text-[#c9a96e]">Give here</Link>
-            </p>
           </motion.div>
         </div>
       </section>
