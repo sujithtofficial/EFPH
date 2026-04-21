@@ -43,6 +43,12 @@ const MINISTRIES = [
     desc: "Visiting the various states of India and praying for the Good News of Jesus Christ to reach every village and town.",
     verse: "How beautiful are the feet of those who bring good news — Romans 10:15",
   },
+  {
+    key: "prison",
+    title: "Prison Ministry",
+    desc: "Bringing the hope and love of Jesus Christ to those behind bars. We visit prisons regularly, sharing the Gospel, providing spiritual counselling, and reminding inmates that no one is beyond the reach of God's grace and redemption.",
+    verse: "I was in prison and you came to visit me — Matthew 25:36",
+  },
 ];
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transition: { duration: 0.6 } } };

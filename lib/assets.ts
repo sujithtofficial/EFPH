@@ -21,7 +21,8 @@ export const ASSETS = {
     prayer: "/images/general/DSC02450.jpg",             // congregation praying
     youth: "/images/youth/DSC00005.jpg",                // youth meeting
     evangelism: "/images/general/DSC02458.jpg",          // pastor preaching
-    missions: "/images/stock/prison-ministry.jpg",            // prison ministry
+    missions: "/images/general/DSC02427.jpg",            // full packed congregation
+    prison: "/images/stock/prison-ministry.jpg",            // prison ministry
     counselling: "/images/stock/counselling.jpg",         // counselling stock image
   },
 
