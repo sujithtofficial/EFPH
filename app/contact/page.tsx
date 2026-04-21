@@ -40,11 +40,14 @@ export default function ContactPage() {
   return (
     <>
       {/* ── Banner ─────────────────────────────────────── */}
-      <section className="relative h-72 md:h-80 flex items-end pb-12 overflow-hidden">
-        <Image src={ASSETS.contactBanner} alt="Contact" fill className="object-cover" priority sizes="100vw" />
-        <div className="absolute inset-0 bg-[#0f172a]/70" />
+      <section className="relative h-72 md:h-80 flex items-end pb-12 overflow-hidden bg-gradient-to-br from-[#0a0f1e] via-[#162040] to-[#1a3060]">
+        {/* Decorative elements */}
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #c9a96e 0%, transparent 50%), radial-gradient(circle at 80% 20%, #4a90d9 0%, transparent 40%)' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-[#c9a96e]/10 rounded-full" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-[#c9a96e]/15 rounded-full" />
+        <div className="absolute inset-0 noise" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-16 w-full">
-          <p className="text-[#b0925e] font-semibold uppercase tracking-widest text-sm mb-2">Reach Out</p>
+          <p className="text-[#c9a96e] font-semibold uppercase tracking-widest text-sm mb-2">Reach Out</p>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white">Contact Us</h1>
         </div>
       </section>

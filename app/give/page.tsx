@@ -124,9 +124,11 @@ export default function GivePage() {
   return (
     <>
       {/* ── Banner ─────────────────────────────────────── */}
-      <section className="relative h-72 md:h-80 flex items-end pb-12 overflow-hidden">
-        <Image src={ASSETS.giveBanner} alt="Give" fill className="object-cover" priority sizes="100vw" />
-        <div className="absolute inset-0 bg-dark-gradient/80" />
+      <section className="relative h-72 md:h-80 flex items-end pb-12 overflow-hidden bg-gradient-to-br from-[#0a0f1e] via-[#1a1a0e] to-[#2a1f0a]">
+        {/* Warm gold decorative accents */}
+        <div className="absolute inset-0 opacity-25" style={{ backgroundImage: 'radial-gradient(circle at 70% 40%, #c9a96e 0%, transparent 45%), radial-gradient(circle at 20% 70%, #8a6f42 0%, transparent 35%)' }} />
+        <div className="absolute top-1/2 right-16 -translate-y-1/2 w-80 h-80 border border-[#c9a96e]/10 rounded-full" />
+        <div className="absolute top-1/2 right-16 -translate-y-1/2 w-52 h-52 border border-[#c9a96e]/20 rounded-full" />
         <div className="absolute inset-0 noise" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-16 w-full">
           <p className="eyebrow mb-2">Give Online</p>
