@@ -146,7 +146,7 @@ export default function GivePage() {
               If you feel led to support the ministry at Ebenezer Faith Prayer House, you are most welcome to give through this page.
             </p>
             <p className="text-gray-600 leading-relaxed text-[15px] mb-4">
-              There is absolutely no obligation — please give freely and cheerfully, only as you feel moved to do so.
+              There is absolutely no obligation, please give freely and cheerfully, only as you feel moved to do so.
             </p>
             <p className="text-gray-500 text-sm leading-relaxed">
               Your support helps sustain Sunday services, children's ministry, prison outreach, and our missions work through Push India.

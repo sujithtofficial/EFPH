@@ -28,7 +28,7 @@ export default function GalleryPage() {
     <>
       {/* ── Banner ─────────────────────────────────────── */}
       <section className="relative h-72 md:h-80 flex items-end pb-12 overflow-hidden">
-        <Image src={ALBUMS[0].photos[0]} alt="Gallery" fill className="object-cover" priority sizes="100vw" />
+        <Image src={ASSETS.galleryBanner} alt="Gallery" fill className="object-cover" priority sizes="100vw" />
         <div className="absolute inset-0 bg-[#0f172a]/70" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-16 w-full">
           <p className="text-[#b0925e] font-semibold uppercase tracking-widest text-sm mb-2">Moments of Grace</p>

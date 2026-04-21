@@ -38,11 +38,11 @@ const EVENTS = [
 const TESTIMONIALS = [
   {
     text: "You get a warm welcome from the people here. The church is based on Spiritual vision. The fasting prayer which happens here is like a festival. The entire congregation does not miss the fasting prayer for 21 days, which is amazing.",
-    name: "Church Member",
+    name: "",
   },
   {
     text: "It is a Bible based church. The members are Godly people who show genuine love and care. Sunday class is awesome for the kids and they can get to know the word of the Lord.",
-    name: "Church Member",
+    name: "",
   },
 ];
 
@@ -99,8 +99,11 @@ export default function HomePage() {
               <span className="text-gradient-gold">Find Community.</span>
             </motion.h1>
 
+            <motion.p variants={fadeUp} className="text-gray-300/90 text-lg md:text-xl leading-relaxed mb-2 max-w-xl font-light">
+              We are a Christ centered church
+            </motion.p>
+
             <motion.p variants={fadeUp} className="text-gray-300/90 text-lg md:text-xl leading-relaxed mb-10 max-w-xl font-light">
-              {CHURCH.description}
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
@@ -281,12 +284,14 @@ export default function HomePage() {
               >
                 <Quote size={28} className="text-[#c9a96e] mb-5 opacity-70" />
                 <p className="text-gray-600 leading-relaxed italic mb-6 text-[15px]">{t.text}</p>
+                {t.name && (
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#c9a96e] to-[#9a7540] flex items-center justify-center">
                     <span className="text-white text-xs font-bold">✦</span>
                   </div>
                   <span className="text-gray-700 font-medium text-sm">{t.name}</span>
                 </div>
+                )}
               </motion.div>
             ))}
           </div>
@@ -307,7 +312,7 @@ export default function HomePage() {
             <h2 className="section-title-light mt-3 mb-4">Submit a Prayer Request</h2>
             <div className="gold-bar-center" />
             <p className="text-gray-400 mb-8 text-[15px] leading-relaxed">
-              Our pastoral team prays over every request. You are not alone — we stand with you in faith.
+              Our pastoral team prays over every request. You are not alone, we stand with you in faith.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link href="/contact#prayer" className="btn-gold">

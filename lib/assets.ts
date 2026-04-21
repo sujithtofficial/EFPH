@@ -17,12 +17,12 @@ export const ASSETS = {
 
   /* ─── Ministries ──────────────────────────────────────────────────── */
   ministries: {
-    childrens: "/images/christmas/IMG_1530.jpg",          // Kingdom Kids
+    childrens: "/images/christmas/IMG_1548.jpg",          // Kingdom Kids
     prayer: "/images/general/DSC02450.jpg",             // congregation praying
     youth: "/images/youth/DSC00005.jpg",                // youth meeting
     evangelism: "/images/general/DSC02458.jpg",          // pastor preaching
-    missions: "/images/general/DSC02427.jpg",            // full packed congregation
-    counselling: "/images/general/DSC02435.jpg",         // pastor praying for member
+    missions: "/images/stock/prison-ministry.jpg",            // prison ministry
+    counselling: "/images/stock/counselling.jpg",         // counselling stock image
   },
 
   /* ─── Events ──────────────────────────────────────────────────────── */
@@ -128,11 +128,14 @@ export const ASSETS = {
     },
   ],
 
+  /* ─── Gallery ──────────────────────────────────────────────────────── */
+  galleryBanner: "/images/stock/gallery-banner.jpg",
+
   /* ─── Give / Offering ─────────────────────────────────────────────── */
-  giveBanner: "/images/general/DSC02464.jpg",
+  giveBanner: "/images/stock/give-banner.jpg",
 
   /* ─── Contact ─────────────────────────────────────────────────────── */
-  contactBanner: "/images/general/DSC00044.jpg",
+  contactBanner: "/images/stock/contact-banner.jpg",
 
   /* ─── YouTube channel ────────────────────────────────────────────── */
   youtubeChannelId: "UC3c9fhwTB3Wg2JvfcXZKoUw",

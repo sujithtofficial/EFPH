@@ -69,43 +69,51 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Our Story ───────────────────────────────────────────── */}
+      {/* ── Leadership ───────────────────────────────────────────── */}
       <section className="section-pad bg-cream-gradient relative overflow-hidden">
         <div className="absolute top-0 right-0 text-[200px] font-black text-[#c9a96e]/5 leading-none select-none pointer-events-none">E</div>
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="eyebrow">Our Story</span>
-            <h2 className="section-title mt-3">{CHURCH.name}</h2>
-            <div className="gold-bar" />
-            <p className="text-gray-600 leading-relaxed mb-5 text-[15px]">
-              Ebenezer Ministries was founded on a singular conviction: that a church built on prayer, praise, and service will see the hand of God move powerfully in its midst. We are rooted in the heart of Bengaluru — in the Mahadevapura neighbourhood — and our doors are open to all.
-            </p>
-            <p className="text-gray-600 leading-relaxed mb-5 text-[15px]">
-              The name <strong>"Ebenezer"</strong> — meaning <em>"Thus far the Lord has helped us"</em> (1 Samuel 7:12) — defines our testimony. Every step of this ministry has been bathed in the faithfulness of God.
-            </p>
-            <p className="text-gray-600 leading-relaxed mb-8 text-[15px]">
-              From weekly Sunday services in English, Hindi, Tamil, and Kannada to 21-day fasting prayer cycles, outreach, and children's Sunday school, Ebenezer Ministries is a full-spectrum ministry family.
-            </p>
-            <Link href="/ministries" className="btn-gold">Our Ministries <ArrowRight size={16} /></Link>
-          </motion.div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-14">
+            <span className="eyebrow">Our Leaders</span>
+            <h2 className="section-title mt-3">Leadership</h2>
+            <div className="gold-bar-center" />
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative h-[460px]"
-          >
-            <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.2)]">
-              <Image src={ASSETS.aboutImage2} alt="Church family" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e]/20 to-transparent" />
-            </div>
-          </motion.div>
+          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="card-glass p-8 rounded-2xl text-center"
+            >
+              <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-[#c9a96e] to-[#9a7540] flex items-center justify-center mb-5">
+                <span className="text-white text-3xl font-bold">PJ</span>
+              </div>
+              <h3 className="text-[#0a0f1e] font-bold text-xl mb-2">Pastor Joy John Samuel</h3>
+              <p className="text-[#b0925e] text-sm font-semibold mb-4">Senior Pastor</p>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Pastor Joy has served as a minister of the Lord for over 30 years and is the senior Pastor of Ebenezer Ministries. He leads the Tamil and Kannada congregation. Pastor Joy is a great worship leader and has released 3 albums in Tamil.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="card-glass p-8 rounded-2xl text-center"
+            >
+              <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-[#c9a96e] to-[#9a7540] flex items-center justify-center mb-5">
+                <span className="text-white text-3xl font-bold">SJ</span>
+              </div>
+              <h3 className="text-[#0a0f1e] font-bold text-xl mb-2">Sister Simi Joy</h3>
+              <p className="text-[#b0925e] text-sm font-semibold mb-4">Pastor &amp; Bible Teacher</p>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Sister Simi Joy is the wife of Pastor Joy and leads the English and Hindi congregation. She is a wonderful Bible teacher and is known for her in-depth teaching of the book of Revelation and the end times.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
