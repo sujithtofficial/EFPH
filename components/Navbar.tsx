@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Menu, X, Heart } from "lucide-react";
@@ -46,9 +47,7 @@ export default function Navbar() {
       <div className="container-xl flex items-center justify-between h-20 px-4 md:px-8 lg:px-16">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-sm bg-[#b0925e] flex items-center justify-center font-bold text-white text-lg group-hover:bg-[#8a6f42] transition-colors">
-            E
-          </div>
+          <Image src="/images/logo.jpg" alt="EFPH Logo" width={44} height={44} className="rounded-full" />
           <div className="hidden sm:block">
             <span className="text-white font-bold text-sm leading-tight block">
               {CHURCH.shortName}

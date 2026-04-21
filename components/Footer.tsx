@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Phone, Mail, Clock, Navigation } from "lucide-react";
 import { CHURCH } from "@/lib/church";
 
@@ -36,9 +37,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-sm bg-[#b0925e] flex items-center justify-center font-bold text-white text-lg">
-                E
-              </div>
+              <Image src="/images/logo.jpg" alt="EFPH Logo" width={44} height={44} className="rounded-full" />
               <div>
                 <span className="text-white font-bold text-sm block leading-tight">{CHURCH.shortName}</span>
               </div>
