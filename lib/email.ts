@@ -1,7 +1,11 @@
 import { Resend } from "resend";
 import { CHURCH } from "./church";
 
-const resend = new Resend(process.env.RESEND_API_KEY!);
+let _resend: Resend;
+function getResend() {
+  if (!_resend) _resend = new Resend(process.env.RESEND_API_KEY!);
+  return _resend;
+}
 
 interface DonationEmailProps {
   to: string;
@@ -27,7 +31,7 @@ export async function sendDonationConfirmation({
       ? `₹${amount.toLocaleString("en-IN")}`
       : `$${(amount / 100).toFixed(2)}`;
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from:    `${CHURCH.shortName} <noreply@ebenezerministries.in>`,
     to:      [to],
     subject: `Thank you for your offering – ${CHURCH.shortName}`,
