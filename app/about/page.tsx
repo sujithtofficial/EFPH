@@ -88,8 +88,9 @@ export default function AboutPage() {
             transition={{ duration: 0.7 }}
             className="relative w-full h-72 md:h-[420px] rounded-2xl overflow-hidden mb-12"
           >
-            <Image src={ASSETS.aboutImage2} alt="Ebenezer Ministries Leadership" fill className="object-cover object-center" sizes="100vw" />
+            <Image src={ASSETS.aboutImage2} alt="Ebenezer Ministries Leadership" fill className="object-cover object-left" sizes="100vw" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-transparent to-transparent opacity-60" />
+            <div className="absolute inset-0 bg-gradient-to-l from-[#0a0f1e] via-transparent to-transparent opacity-80" />
           </motion.div>
 
           {/* Bio cards */}
