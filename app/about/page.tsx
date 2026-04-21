@@ -73,11 +73,11 @@ export default function AboutPage() {
       <section className="relative overflow-hidden">
         {/* Full-width background image with overlay */}
         <div className="absolute inset-0">
-          <Image src={ASSETS.aboutImage2} alt="Ebenezer Ministries Leadership" fill className="object-cover" sizes="100vw" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0f1e]/95 via-[#0a0f1e]/80 to-[#0a0f1e]/40" />
+          <Image src={ASSETS.aboutImage2} alt="Ebenezer Ministries Leadership" fill className="object-cover object-left" sizes="100vw" />
+          <div className="absolute inset-0 bg-gradient-to-l from-[#0a0f1e]/95 via-[#0a0f1e]/80 to-[#0a0f1e]/40" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-24">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-24 flex justify-end">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -91,7 +91,7 @@ export default function AboutPage() {
 
             <div className="space-y-8">
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
+                initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
@@ -105,7 +105,7 @@ export default function AboutPage() {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
+                initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.15 }}
