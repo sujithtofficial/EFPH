@@ -70,56 +70,78 @@ export default function AboutPage() {
       </section>
 
       {/* ── Leadership ───────────────────────────────────────────── */}
-      <section className="section-pad bg-[#0a0f1e] relative overflow-hidden">
-        <div className="orb orb-gold w-72 h-72 top-0 left-0 opacity-10" />
+      <section className="relative overflow-hidden bg-[#0a0f1e]">
+        {/* Background accent */}
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#c9a96e]/5 to-transparent" />
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <span className="text-[#c9a96e] font-semibold tracking-widest uppercase text-sm">Our Leaders</span>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-white mt-3 mb-2">Leadership</h2>
-            <div className="w-16 h-1 bg-[#c9a96e] mx-auto" />
-          </div>
-
-          {/* Leader image — full width, no overlay on center */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="relative w-full h-72 md:h-[420px] rounded-2xl overflow-hidden mb-12"
-          >
-            <Image src={ASSETS.aboutImage2} alt="Ebenezer Ministries Leadership" fill className="object-cover object-left" sizes="100vw" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-transparent to-transparent opacity-60" />
-            <div className="absolute inset-0 bg-gradient-to-l from-[#0a0f1e] via-transparent to-transparent opacity-80" />
-          </motion.div>
-
-          {/* Bio cards */}
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-2 min-h-[600px]">
+            {/* Left — Image */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 1.05 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="card-dark rounded-2xl p-6 md:p-8"
+              transition={{ duration: 0.8 }}
+              className="relative h-80 lg:h-auto"
             >
-              <h3 className="text-white font-bold text-xl mb-3">Pastor Joy John Samuel</h3>
-              <p className="text-gray-300 text-sm leading-relaxed">
-                Pastor Joy has served as a minister of the Lord for over 30 years and is the senior Pastor of Ebenezer Ministries. He leads the Tamil and Kannada congregation. Pastor Joy is a great worship leader and has released 3 albums in Tamil.
-              </p>
+              <Image
+                src={ASSETS.aboutImage2}
+                alt="Ebenezer Ministries Leadership"
+                fill
+                className="object-cover object-[25%_center]"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+              />
+              {/* Darken right edge to hide translator */}
+              <div className="absolute inset-0 bg-gradient-to-l from-[#0a0f1e] via-transparent to-transparent opacity-90" />
+              {/* Bottom fade on mobile */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-transparent to-transparent lg:opacity-0 opacity-70" />
+              {/* Subtle vignette */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e]/40 to-transparent" />
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="card-dark rounded-2xl p-6 md:p-8"
-            >
-              <h3 className="text-white font-bold text-xl mb-3">Sister Simi Joy</h3>
-              <p className="text-gray-300 text-sm leading-relaxed">
-                Sister Simi Joy is the wife of Pastor Joy and leads the English and Hindi congregation. She is a wonderful Bible teacher and is known for her in-depth teaching of the book of Revelation and the end times.
-              </p>
-            </motion.div>
+            {/* Right — Content */}
+            <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 py-16 lg:py-24">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+              >
+                <span className="text-[#c9a96e] font-semibold tracking-widest uppercase text-xs">Our Leaders</span>
+                <h2 className="text-4xl md:text-5xl font-extrabold text-white mt-3 mb-2">Leadership</h2>
+                <div className="w-16 h-1 bg-[#c9a96e] mb-10" />
+              </motion.div>
+
+              <div className="space-y-6">
+                <motion.div
+                  initial={{ opacity: 0, x: 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="relative pl-6 border-l-2 border-[#c9a96e]/40"
+                >
+                  <div className="absolute left-0 top-0 w-2 h-2 bg-[#c9a96e] rounded-full -translate-x-[5px]" />
+                  <h3 className="text-white font-bold text-lg mb-2">Pastor Joy John Samuel</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Pastor Joy has served as a minister of the Lord for over 30 years and is the senior Pastor of Ebenezer Ministries. He leads the Tamil and Kannada congregation. Pastor Joy is a great worship leader and has released 3 albums in Tamil.
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.25 }}
+                  className="relative pl-6 border-l-2 border-[#c9a96e]/40"
+                >
+                  <div className="absolute left-0 top-0 w-2 h-2 bg-[#c9a96e] rounded-full -translate-x-[5px]" />
+                  <h3 className="text-white font-bold text-lg mb-2">Sister Simi Joy</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Sister Simi Joy is the wife of Pastor Joy and leads the English and Hindi congregation. She is a wonderful Bible teacher and is known for her in-depth teaching of the book of Revelation and the end times.
+                  </p>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
