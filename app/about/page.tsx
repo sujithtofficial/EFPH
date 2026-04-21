@@ -102,8 +102,7 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               className="card-dark rounded-2xl p-6 md:p-8"
             >
-              <h3 className="text-white font-bold text-xl mb-1">Pastor Joy John Samuel</h3>
-              <p className="text-[#c9a96e] text-sm font-semibold mb-3">Senior Pastor</p>
+              <h3 className="text-white font-bold text-xl mb-3">Pastor Joy John Samuel</h3>
               <p className="text-gray-300 text-sm leading-relaxed">
                 Pastor Joy has served as a minister of the Lord for over 30 years and is the senior Pastor of Ebenezer Ministries. He leads the Tamil and Kannada congregation. Pastor Joy is a great worship leader and has released 3 albums in Tamil.
               </p>
@@ -116,8 +115,7 @@ export default function AboutPage() {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="card-dark rounded-2xl p-6 md:p-8"
             >
-              <h3 className="text-white font-bold text-xl mb-1">Sister Simi Joy</h3>
-              <p className="text-[#c9a96e] text-sm font-semibold mb-3">Pastor &amp; Bible Teacher</p>
+              <h3 className="text-white font-bold text-xl mb-3">Sister Simi Joy</h3>
               <p className="text-gray-300 text-sm leading-relaxed">
                 Sister Simi Joy is the wife of Pastor Joy and leads the English and Hindi congregation. She is a wonderful Bible teacher and is known for her in-depth teaching of the book of Revelation and the end times.
               </p>
