@@ -41,7 +41,6 @@ export default function Footer() {
               </div>
               <div>
                 <span className="text-white font-bold text-sm block leading-tight">{CHURCH.shortName}</span>
-                <span className="text-[#b0925e] text-xs tracking-widest uppercase">Church</span>
               </div>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed mb-6">

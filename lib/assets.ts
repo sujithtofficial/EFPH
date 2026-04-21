@@ -133,10 +133,10 @@ export const ASSETS = {
   galleryBanner: "/images/stock/gallery-banner.jpg",
 
   /* ─── Give / Offering ─────────────────────────────────────────────── */
-  giveBanner: "/images/general/DSC02445.jpg",
+  giveBanner: "/images/newyear/DSC01165.jpg",
 
   /* ─── Contact ─────────────────────────────────────────────────────── */
-  contactBanner: "/images/stock/contact-banner.jpg",
+  contactBanner: "/images/general/DSC02432.jpg",
 
   /* ─── YouTube channel ────────────────────────────────────────────── */
   youtubeChannelId: "UC3c9fhwTB3Wg2JvfcXZKoUw",

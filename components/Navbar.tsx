@@ -53,9 +53,6 @@ export default function Navbar() {
             <span className="text-white font-bold text-sm leading-tight block">
               {CHURCH.shortName}
             </span>
-            <span className="text-[#b0925e] text-xs font-medium tracking-widest uppercase leading-tight">
-              Church
-            </span>
           </div>
         </Link>
 
