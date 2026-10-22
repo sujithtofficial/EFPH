@@ -6,7 +6,7 @@ Reviewed 23 October 2026 (Asia/Kolkata), starting from `70dcc2f` on `main`.
 
 Preserve the church's text, imagery, navy/gold identity, service schedule, and ministry information. Use warm ivory surfaces, restrained serif display headings, consistent controls, generous spacing, and quieter borders. Prioritise the visitor's next step: watch the correct service, plan a visit, submit a prayer request, or give in INR.
 
-The homepage now has a readable photographic hero, three evenly spaced service links, an editorial welcome/photo section, event information, the original testimonies, and the original prayer invitation. Internal pages share the typography and navigation. Background video and YouTube playback start only on request. Original church photographs remain in the repository.
+The homepage now has the original autoplaying background video, three evenly spaced service links, an editorial welcome/photo section, event information, the original testimonies, and the original prayer invitation. Internal pages share the typography and navigation. The background video plays muted, loops inline, and retains a pause/play control and image fallback. YouTube playback starts on request. Original church photographs remain in the repository.
 
 ## Findings and fixes
 
@@ -54,7 +54,7 @@ Fetched the original production homepage and revised production build, then tota
 | Estimated gzip JavaScript | 255,936 bytes | 187,510 bytes |
 | HTML | 53,401 bytes | 70,531 bytes |
 
-JavaScript is approximately 28% smaller uncompressed and 27% smaller by estimated gzip. HTML increases as more content is rendered on the server. The 8.3 MiB background video no longer starts downloading automatically, and the live page no longer loads a YouTube iframe before playback is requested. Lighthouse scores and field Web Vitals were not measured.
+This comparison was measured before the follow-up restoring homepage video autoplay. JavaScript was approximately 28% smaller uncompressed and 27% smaller by estimated gzip. HTML increases as more content is rendered on the server. The original 8.3 MiB background video now autoplays as requested; the live page still avoids loading a YouTube iframe before playback is requested. Lighthouse scores and field Web Vitals were not measured.
 
 ## Remaining deployment checks and limits
 
