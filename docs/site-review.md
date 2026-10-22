@@ -12,7 +12,7 @@ The homepage now has a readable photographic hero, three evenly spaced service l
 
 | Finding | Result |
 | --- | --- |
-| The live page had one generic player and incompatible 9:00/11:30 service times | Two explicit choices: Tamil & Kannada, Sunday 7:15 AM IST; English & Hindi, Sunday 11:00 AM IST. Each selects its own latest matching Sunday video from the church's feed. |
+| The live page had one generic player and incompatible 9:00/11:30 service times | Two explicit choices: Tamil & Kannada, Sunday 7:15 AM IST; English & Hindi, Sunday 11:00 AM IST. Each selects its own latest matching Sunday video from the church's feed. A permanent current-broadcast link covers feed delays. |
 | Any Sunday was described as “Live Now”, based on the visitor's local date | Removed date-based live assertions. Actual video titles are preserved; the page shows the selected recording and a direct YouTube fallback. |
 | International donation option and publicly callable Stripe endpoints | Removed Stripe UI, server routes, dependencies, and setup variables. Updated only the corresponding payment-provider references in policies. |
 | Payment verification accepted browser-supplied amount, recipient and purpose | HMAC verification uses constant-time comparison. Receipt details come from the authenticated Razorpay order. Captured status, order identity, INR currency, paid amount and total are verified. |

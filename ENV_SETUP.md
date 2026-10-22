@@ -34,7 +34,7 @@ The server trusts Vercel's `x-vercel-forwarded-for` header only when running on 
 
 ## Video services
 
-No YouTube API key is needed or shipped to browsers. The server caches the church's public Atom feed for five minutes and finds each language's newest matching `Sunday Service` title. The player is loaded only when a visitor presses Play. The actual video's title is preserved; the page does not infer a live broadcast merely because it is Sunday or because a recording's title contains “LIVE”.
+No YouTube API key is needed or shipped to browsers. The server caches the church's public Atom feed for five minutes and finds each language's newest matching `Sunday Service` title. The player is loaded only when a visitor presses Play. A permanent **Open Live Stream** link also opens the channel’s current broadcast, including when the feed has not updated yet. The actual video's title is preserved; the page does not infer a live broadcast merely because it is Sunday or because a recording's title contains “LIVE”.
 
 The feed contains a limited recent window. Dedicated language playlists are recommended if Sunday recordings might fall out of that window during busy events. If no matching recording is present or YouTube is unavailable, that service retains its own YouTube search link; it never silently plays the other language.
 
