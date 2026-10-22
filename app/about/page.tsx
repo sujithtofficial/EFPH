@@ -52,7 +52,7 @@ export default function AboutPage() {
     <>
       {/* ── Banner ──────────────────────────────────────────────── */}
       <section className="relative h-80 md:h-[420px] flex items-end pb-14 md:items-start md:pt-14 md:pb-0 overflow-hidden">
-        <Image src={ASSETS.aboutImage} alt="Ebenezer Faith Prayer House banner" fill className="object-cover object-[center_35%] md:scale-[1.35]" priority sizes="100vw" />
+        <Image src={ASSETS.aboutImage} alt="Ebenezer Faith Prayer House banner" fill className="object-cover object-[center_35%] md:scale-[1.2]" priority sizes="100vw" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-16 w-full">
           <p className="eyebrow mb-2">Who We Are</p>
           <h1 className="display-xl text-white leading-[1.05] max-w-xl">
