@@ -10,6 +10,7 @@ export const ASSETS = {
 
   /* ─── Hero / Home ─────────────────────────────────────────────────── */
   heroPoster: "/images/home/hero.jpg",
+  welcomeImage: "/images/newyear/DSC01120.jpg",
 
   /* ─── About ───────────────────────────────────────────────────────── */
   aboutImage: "/images/general/DSC02427.jpg",   // congregation worshipping
@@ -46,7 +47,6 @@ export const ASSETS = {
         "/images/christmas/IMG_1535.jpg",
         "/images/christmas/IMG_1540.jpg",
         "/images/christmas/IMG_1548.jpg",
-        "/images/christmas/IMG_1550.jpg",
         "/images/christmas/IMG_1552.jpg",
         "/images/christmas/IMG_1555.jpg",
         "/images/christmas/IMG_1560.jpg",
@@ -94,7 +94,6 @@ export const ASSETS = {
         "/images/general/DSC00047.jpg",
         "/images/general/DSC00053.jpg",
         "/images/general/DSC02427.jpg",
-        "/images/general/DSC02432.jpg",
         "/images/general/DSC02435.jpg",
         "/images/general/DSC02445.jpg",
         "/images/general/DSC02450.jpg",
@@ -102,7 +101,6 @@ export const ASSETS = {
         "/images/general/DSC02460.jpg",
         "/images/general/DSC02464.jpg",
         "/images/general/DSC02468.jpg",
-        "/images/general/IMG_1516.jpg",
         "/images/general/IMG_1543.jpg",
         "/images/general/IMG_1571.jpg",
         "/images/general/IMG_5158.jpg",

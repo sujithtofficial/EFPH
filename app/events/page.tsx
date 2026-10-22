@@ -24,6 +24,15 @@ const EVENTS = [
     image: "/images/newyear/DSC01196.jpg",
   },
   {
+    category: "Weekly",
+    title: "Wednesday Bible Study — English & Tamil",
+    date: "Every Wednesday",
+    time: "English 6:15 PM | Tamil 7:15 PM",
+    venue: "Ebenezer Ministries, Bengaluru",
+    desc: "Weekly Bible study and teaching in English and Tamil. All are welcome.",
+    image: "/images/general/DSC02458.jpg",
+  },
+  {
     category: "Monthly",
     title: "Youth Meeting",
     date: "Every Last Saturday",

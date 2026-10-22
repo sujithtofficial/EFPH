@@ -21,6 +21,5 @@ export const CHURCH = {
   services: [
     { day: "Sunday", time: "7:15 AM", lang: "Tamil & Kannada" },
     { day: "Sunday", time: "11:00 AM", lang: "English & Hindi" },
-    { day: "Friday", time: "6:30 PM", lang: "Bible Study" },
   ],
 };

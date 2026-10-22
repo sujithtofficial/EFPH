@@ -23,7 +23,12 @@ export function parseYouTubeFeed(xml: string): ChurchVideo[] {
   });
 }
 
-export function findServiceVideo(videos: ChurchVideo[], service: ServiceId) {
+export function matchesServiceTitle(title: string, service: ServiceId): boolean {
   const language = service === "tamil-kannada" ? /tamil|kannada|தமிழ்|ಕನ್ನಡ/i : /english|hindi|हिन्दी|हिंदी/i;
-  return [...videos].sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt)).find((video) => /sunday\s+service/i.test(video.title) && language.test(video.title));
+  return /\bsunday\b/i.test(title) && /\b(service|worship)\b/i.test(title) && language.test(title);
+}
+
+// Recording discovery only. Actual live state is checked with videos.list.
+export function findServiceVideo(videos: ChurchVideo[], service: ServiceId) {
+  return [...videos].sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt)).find((video) => matchesServiceTitle(video.title, service));
 }
