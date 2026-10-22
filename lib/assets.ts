@@ -13,7 +13,7 @@ export const ASSETS = {
   welcomeImage: "/images/newyear/DSC01120.jpg",
 
   /* ─── About ───────────────────────────────────────────────────────── */
-  aboutImage: "/images/general/DSC02427.jpg",   // congregation worshipping
+  aboutImage: "/images/about/churchbanner.jpg",
   aboutImage2: "/images/newyear/DSC01201.jpg",  // pastor praying
 
   /* ─── Ministries ──────────────────────────────────────────────────── */
