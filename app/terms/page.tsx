@@ -1,11 +1,8 @@
-import { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { CHURCH } from "@/lib/church";
 
-export const metadata: Metadata = {
-  title: `Terms & Conditions | ${CHURCH.shortName}`,
-  description: `Terms and conditions for ${CHURCH.name}.`,
-};
+export const metadata = pageMetadata("/terms", "Terms & Conditions", "Terms & Conditions for Ebenezer Ministries (EFPH).");
 
 export default function TermsPage() {
   return (
@@ -39,7 +36,7 @@ export default function TermsPage() {
           <ul>
             <li><strong>Non-refundable</strong> — All contributions are final and non-refundable. There is a strict no-refund policy in place.</li>
             <li><strong>Governance</strong> — {CHURCH.shortName} upholds good governance principles in all operations and maintains rigorous oversight of financial processes and accountability to governing authorities.</li>
-            <li><strong>Processing</strong> — Donations in Indian Rupees (₹) are processed by Razorpay. International donations in US Dollars ($) are processed by Stripe.</li>
+            <li><strong>Processing</strong> — Donations in Indian Rupees (₹) are processed by Razorpay.</li>
           </ul>
 
           <h2>4. Intellectual Property</h2>

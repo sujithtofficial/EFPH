@@ -1,12 +1,12 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useScroll, useTransform, type Variants } from "framer-motion";
-import { useRef } from "react";
-import { PlayCircle, Calendar, Clock, MapPin, ArrowRight, Quote, ChevronDown } from "lucide-react";
+import { PlayCircle, Calendar, Clock, MapPin, ArrowRight, Quote, ArrowDown } from "lucide-react";
+import HeroMedia from "@/components/HeroMedia";
 import { ASSETS } from "@/lib/assets";
 import { CHURCH } from "@/lib/church";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata("/", CHURCH.name, CHURCH.description);
 
 const EVENTS = [
   {
@@ -46,279 +46,103 @@ const TESTIMONIALS = [
   },
 ];
 
-const fadeUp: Variants = { hidden: { opacity: 0, y: 40 }, show: { opacity: 1, y: 0, transition: { duration: 0.7 } } };
-const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
-const fadeIn: Variants = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.8 } } };
-
 export default function HomePage() {
-  const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
   return (
     <>
-      {/* ── HERO ──────────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative h-screen min-h-[680px] flex items-center overflow-hidden">
-        {/* Parallax video */}
-        <motion.div style={{ y: heroY }} className="absolute inset-0 scale-110 z-0">
-          <video
-            autoPlay muted loop playsInline preload="none"
-            poster={ASSETS.heroPoster}
-            className="absolute inset-0 w-full h-full object-cover"
-          >
-            <source src={ASSETS.heroVideo} type="video/mp4" />
-          </video>
-        </motion.div>
-
-        {/* Multi-layer dark overlay */}
-        <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#0a0f1e]/85 via-[#0a0f1e]/60 to-[#0a0f1e]/90" />
-
-        {/* Decorative orbs */}
-        <div className="orb orb-gold w-96 h-96 z-[1] -top-20 -right-20" />
-        <div className="orb orb-blue w-72 h-72 z-[1] bottom-20 left-10" style={{ animationDelay: "3s" }} />
-
-        {/* Noise texture */}
-        <div className="absolute inset-0 z-[2] noise" />
-
-        <motion.div
-          style={{ opacity: heroOpacity }}
-          className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-16 w-full"
-        >
-          <motion.div variants={stagger} initial="hidden" animate="show" className="max-w-4xl">
-            <motion.div variants={fadeUp} className="flex items-center gap-3 mb-7">
-              <div className="w-8 h-px bg-gradient-to-r from-[#c9a96e] to-transparent" />
-              <span className="eyebrow">Welcome to {CHURCH.shortName}</span>
-            </motion.div>
-
-            <motion.h1 variants={fadeUp} className="display-xl text-white mb-4 leading-[1.05]">
-              Come As You{" "}
-              <span className="text-gradient-gold">Are.</span>
-              <br />
-              Encounter God.{" "}
-              <span className="text-gradient-gold">Find Community.</span>
-            </motion.h1>
-
-            <motion.p variants={fadeUp} className="text-gray-300/90 text-lg md:text-xl leading-relaxed mb-2 max-w-xl font-light">
-            </motion.p>
-
-            <motion.p variants={fadeUp} className="text-gray-300/90 text-lg md:text-xl leading-relaxed mb-10 max-w-xl font-light">
-            </motion.p>
-
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-              <Link href="/live" className="btn-gold">
-                <PlayCircle size={18} /> Watch Live
-              </Link>
-              <Link href="/contact" className="btn-outline">
-                Plan a Visit <ArrowRight size={16} />
-              </Link>
-            </motion.div>
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll cue */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-60"
-        >
-          <ChevronDown size={20} className="text-white animate-bounce" />
-        </motion.div>
-      </section>
-
-      {/* ── SERVICE TIMES BAR ─────────────────────────────────────── */}
-      <section className="bg-[#0a0f1e] relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#c9a96e]/5 via-transparent to-[#c9a96e]/5" />
-        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-8 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {CHURCH.services.map((s, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="card-dark p-4 text-center hover:border-[#c9a96e]/40 transition-colors"
-              >
-                <p className="eyebrow mb-1">{s.day}</p>
-                <p className="text-white font-bold text-base">{s.time}</p>
-                <p className="text-gray-500 text-xs mt-0.5">{s.lang}</p>
-              </motion.div>
-            ))}
+      <section className="home-hero relative isolate flex items-center overflow-hidden bg-navy">
+        <HeroMedia />
+        <div className="site-width relative z-10 w-full py-20 pointer-events-none">
+          <p className="eyebrow hero-eyebrow mb-7">Welcome to {CHURCH.shortName}</p>
+          <h1 className="hero-title text-white max-w-4xl">
+            Come As You Are.<br />
+            <span className="text-gold-light">Encounter God.</span><br />
+            Find Community.
+          </h1>
+          <div className="mt-10 flex flex-wrap gap-3 pointer-events-auto">
+            <Link href="/live" className="btn-gold"><PlayCircle size={18} /> Watch Live</Link>
+            <Link href="/contact?type=visit#prayer" className="btn-outline on-dark">Plan a Visit <ArrowRight size={17} /></Link>
           </div>
         </div>
+        <a href="#service-times" aria-label="View service times" className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-white/70 p-2"><ArrowDown size={19} /></a>
       </section>
 
-      {/* ── WELCOME ───────────────────────────────────────────────── */}
-      <section className="section-pad bg-cream-gradient relative overflow-hidden">
-        {/* Big decorative letter */}
-        <div className="absolute top-8 right-8 text-[200px] font-black text-[#c9a96e]/5 leading-none select-none pointer-events-none">
-          E
+      <section id="service-times" aria-label="Service times" className="service-strip">
+        <div className="site-width grid sm:grid-cols-3">
+          {CHURCH.services.map((service, index) => (
+            <Link key={service.lang} href={index < 2 ? `/live?service=${index === 0 ? "tamil-kannada" : "english-hindi"}` : "/contact"} className="service-item group">
+              <span className="eyebrow">{service.day}</span>
+              <span className="flex items-baseline gap-3 mt-2"><span className="text-2xl font-semibold text-white tracking-tight">{service.time}</span><span className="text-xs text-gray-400">IST</span></span>
+              <span className="flex justify-between items-center mt-1 text-sm text-gray-300">{service.lang}<ArrowRight size={17} className="text-gold group-hover:translate-x-1 transition-transform" /></span>
+            </Link>
+          ))}
         </div>
+      </section>
 
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <span className="eyebrow">Welcome Note</span>
-            <h2 className="section-title mt-3 mb-2">We Are a Christ Centered Church</h2>
+      <section className="section-pad bg-cream" id="welcome">
+        <div className="site-width grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div>
+            <p className="eyebrow">Welcome Note</p>
+            <h2 className="section-title mt-4 max-w-lg">We Are a Christ Centered Church</h2>
             <div className="gold-bar" />
-            <p className="text-gray-600 leading-relaxed mb-5 text-[15px]">
-              We at Ebenezer Ministries welcome you to attend our life changing worship, listen to the mysteries of the word of God and fellowship with saints.
-            </p>
-            <p className="text-gray-600 leading-relaxed mb-8 text-[15px]">
-              We as a church are more like a family. We come together on Sundays to worship and celebrate Jesus. We explore the mysteries of His word to help people connect their lives to God and also help people connect their lives to <strong>CHRIST</strong>.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link href="/about" className="btn-gold">Learn More <ArrowRight size={16} /></Link>
-              <Link href="/contact" className="btn-outline text-[#c9a96e]">Plan a Visit</Link>
+            <p className="text-gray-600 leading-relaxed mb-5 text-[15px]">We at Ebenezer Ministries welcome you to attend our life changing worship, listen to the mysteries of the word of God and fellowship with saints.</p>
+            <p className="text-gray-600 leading-relaxed mb-8 text-[15px]">We as a church are more like a family. We come together on Sundays to worship and celebrate Jesus. We explore the mysteries of His word to help people connect their lives to God and also help people connect their lives to <strong>CHRIST</strong>.</p>
+            <div className="flex flex-wrap gap-3"><Link href="/about" className="btn-gold">Learn More <ArrowRight size={16} /></Link><Link href="/contact?type=visit#prayer" className="btn-outline">Plan a Visit</Link></div>
+          </div>
+          <div className="relative pb-8 sm:pl-7">
+            <div className="welcome-photo relative aspect-[5/4] overflow-hidden rounded-t-[5rem] rounded-br-2xl">
+              <Image src={ASSETS.aboutImage} alt="Church community" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 45vw" />
             </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative"
-          >
-            {/* Main image */}
-            <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.18)]">
-              <Image src={ASSETS.aboutImage} alt="Church community" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e]/30 to-transparent" />
-            </div>
-            {/* Scripture card floating */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="absolute -bottom-8 -left-8 card-glass p-6 max-w-[250px] shadow-xl ring-glow"
-            >
-              <Quote size={18} className="text-[#c9a96e] mb-2" />
-              <p className="text-xs font-medium italic leading-relaxed text-gray-700">
-                "Shall I bring it to the time of birth, and not cause delivery?"
-              </p>
-              <p className="text-[10px] mt-2 text-[#c9a96e] font-semibold uppercase tracking-widest">Isaiah 66:9</p>
-            </motion.div>
-            {/* Small accent badge */}
-            <motion.div
-              className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-dark-gradient flex items-center justify-center ring-glow float-slow"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6 }}
-            >
-              <span className="text-[#c9a96e] text-xl font-black">✦</span>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── EVENTS ────────────────────────────────────────────────── */}
-      <section className="section-pad bg-dark-gradient relative overflow-hidden">
-        <div className="orb orb-gold w-80 h-80 top-10 right-0" />
-        <div className="orb orb-purple w-64 h-64 bottom-10 left-0" style={{ animationDelay: "4s" }} />
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-center mb-16">
-            <motion.span variants={fadeUp} className="eyebrow">What's On</motion.span>
-            <motion.h2 variants={fadeUp} className="section-title-light mt-3">Upcoming Events</motion.h2>
-            <motion.div variants={fadeIn} className="gold-bar-center" />
-          </motion.div>
-
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid md:grid-cols-3 gap-6">
-            {EVENTS.map((ev, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                className="card-dark p-7 card-hover group cursor-default"
-              >
-                <span className="inline-block bg-[#c9a96e]/15 text-[#c9a96e] text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4">
-                  {ev.tag}
-                </span>
-                <h3 className="text-white font-bold text-lg mb-4 group-hover:text-[#c9a96e] transition-colors">{ev.title}</h3>
-                <div className="space-y-2 mb-5">
-                  <div className="flex items-center gap-2 text-sm text-gray-400"><Calendar size={13} className="text-[#c9a96e] shrink-0" />{ev.date}</div>
-                  <div className="flex items-center gap-2 text-sm text-gray-400"><Clock size={13} className="text-[#c9a96e] shrink-0" />{ev.time}</div>
-                  <div className="flex items-center gap-2 text-sm text-gray-400"><MapPin size={13} className="text-[#c9a96e] shrink-0" />{ev.venue}</div>
-                </div>
-                <p className="text-gray-500 text-sm leading-relaxed border-t border-white/5 pt-4">{ev.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <div className="text-center mt-12">
-            <Link href="/events" className="btn-outline">View All Events <ArrowRight size={16} /></Link>
+            <blockquote className="scripture-card relative -mt-14 mr-7 sm:mr-14 p-6 sm:p-8">
+              <Quote size={23} className="text-gold-dark mb-3" aria-hidden="true" />
+              <p className="font-display text-xl text-navy leading-relaxed">&quot;Shall I bring it to the time of birth, and not cause delivery?&quot;</p>
+              <cite className="eyebrow block mt-4 not-italic">Isaiah 66:9</cite>
+            </blockquote>
           </div>
         </div>
       </section>
 
-      {/* ── TESTIMONIALS ──────────────────────────────────────────── */}
-      <section className="section-pad bg-cream-gradient relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-[#c9a96e]/15 to-transparent" />
-        </div>
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <span className="eyebrow">What People Say</span>
-            <h2 className="section-title mt-3">Testimonies</h2>
-            <div className="gold-bar-center" />
+      <section className="section-pad bg-dark-gradient">
+        <div className="site-width">
+          <div className="flex flex-wrap gap-6 items-end justify-between mb-12">
+            <div><p className="eyebrow">What&apos;s On</p><h2 className="section-title-light mt-3">Upcoming Events</h2></div>
+            <Link href="/events" className="text-gold-light text-sm inline-flex items-center gap-2">View All Events <ArrowRight size={17} /></Link>
           </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {TESTIMONIALS.map((t, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.2, duration: 0.7 }}
-                className="card-glass p-8 card-hover"
-              >
-                <Quote size={28} className="text-[#c9a96e] mb-5 opacity-70" />
-                <p className="text-gray-600 leading-relaxed italic mb-6 text-[15px]">{t.text}</p>
-                {t.name && (
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#c9a96e] to-[#9a7540] flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">✦</span>
-                  </div>
-                  <span className="text-gray-700 font-medium text-sm">{t.name}</span>
+          <div className="grid md:grid-cols-3 gap-6">
+            {EVENTS.map((event, index) => (
+              <article key={event.title} className="event-card">
+                <div className="flex items-center justify-between border-b border-white/15 pb-5 mb-6"><span className="eyebrow">{event.tag}</span><span className="font-display text-4xl text-white/25">0{index + 1}</span></div>
+                <h3 className="font-display text-[28px] leading-tight text-white mb-6">{event.title}</h3>
+                <div className="space-y-3 mb-6 text-sm text-gray-300">
+                  <p className="flex gap-3"><Calendar size={15} className="text-gold shrink-0 mt-0.5" />{event.date}</p>
+                  <p className="flex gap-3"><Clock size={15} className="text-gold shrink-0 mt-0.5" />{event.time}</p>
+                  <p className="flex gap-3"><MapPin size={15} className="text-gold shrink-0 mt-0.5" />{event.venue}</p>
                 </div>
-                )}
-              </motion.div>
+                <p className="text-sm leading-relaxed text-gray-400">{event.desc}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── PRAYER CTA ────────────────────────────────────────────── */}
-      <section className="section-pad bg-dark-gradient relative overflow-hidden text-center">
-        <div className="orb orb-gold w-64 h-64 top-0 left-1/2 -translate-x-1/2 opacity-10" />
-        <div className="max-w-2xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            <span className="eyebrow">We Care For You</span>
-            <h2 className="section-title-light mt-3 mb-4">Submit a Prayer Request</h2>
-            <div className="gold-bar-center" />
-            <p className="text-gray-400 mb-8 text-[15px] leading-relaxed">
-              Our pastoral team prays over every request. You are not alone, we stand with you in faith.
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Link href="/contact#prayer" className="btn-gold">
-                Submit Prayer Request <ArrowRight size={16} />
-              </Link>
-            </div>
-          </motion.div>
+      <section className="section-pad bg-cream">
+        <div className="site-width">
+          <div className="text-center mb-12"><p className="eyebrow">What People Say</p><h2 className="section-title mt-3">Testimonies</h2><div className="gold-bar-center" /></div>
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {TESTIMONIALS.map((testimony, index) => (
+              <blockquote key={index} className="testimony-card">
+                <Quote size={30} className="text-gold-dark mb-6" aria-hidden="true" />
+                <p className="text-gray-600 leading-[1.9] text-[15px]">{testimony.text}</p>
+                {testimony.name && <cite className="block mt-5 not-italic text-sm font-semibold">{testimony.name}</cite>}
+              </blockquote>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad prayer-section">
+        <div className="site-width flex flex-col lg:flex-row gap-10 items-start lg:items-center justify-between">
+          <div className="max-w-2xl"><p className="eyebrow">We Care For You</p><h2 className="section-title-light mt-3 mb-5">Submit a Prayer Request</h2><p className="text-gray-300 text-[15px] leading-relaxed max-w-xl">Our pastoral team prays over every request. You are not alone, we stand with you in faith.</p></div>
+          <Link href="/contact?type=prayer#prayer" className="btn-gold shrink-0">Submit Prayer Request <ArrowRight size={17} /></Link>
         </div>
       </section>
     </>

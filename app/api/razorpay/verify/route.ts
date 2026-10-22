@@ -1,52 +1,19 @@
-import { NextRequest, NextResponse } from "next/server";
-import crypto from "crypto";
-import { sendDonationConfirmation } from "@/lib/email";
+import { getRazorpay } from "@/lib/razorpay";
+import { confirmDonation } from "@/lib/donations";
+import { apiError, readSubmission } from "@/lib/http";
+import { InputError, textField } from "@/lib/validation";
+import { validPaymentSignature } from "@/lib/payment-security";
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const {
-      razorpay_order_id,
-      razorpay_payment_id,
-      razorpay_signature,
-      purpose,
-      name,
-      email,
-      amount,
-    } = body as {
-      razorpay_order_id: string;
-      razorpay_payment_id: string;
-      razorpay_signature: string;
-      purpose: string;
-      name: string;
-      email: string;
-      amount: number;
-    };
-
-    // Verify signature
-    const expectedSig = crypto
-      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET!)
-      .update(`${razorpay_order_id}|${razorpay_payment_id}`)
-      .digest("hex");
-
-    if (expectedSig !== razorpay_signature) {
-      return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
-    }
-
-    // Send confirmation email
-    await sendDonationConfirmation({
-      to: email,
-      donorName: name,
-      amount,
-      currency: "INR",
-      purpose,
-      reference: razorpay_payment_id,
-      gateway: "razorpay",
-    });
-
-    return NextResponse.json({ success: true });
-  } catch (err: unknown) {
-    console.error("Razorpay verify error:", err);
-    return NextResponse.json({ error: "Verification failed" }, { status: 500 });
-  }
+    const body = await readSubmission(req, "verification", 20);
+    const orderId = textField(body.razorpay_order_id, "order ID", 100);
+    const paymentId = textField(body.razorpay_payment_id, "payment ID", 100);
+    const signature = textField(body.razorpay_signature, "signature", 64);
+    getRazorpay();
+    if (!validPaymentSignature(orderId, paymentId, signature, process.env.RAZORPAY_KEY_SECRET!)) throw new InputError("Invalid payment signature");
+    // Fetch captured payment and receipt details from the authenticated gateway.
+    const receiptSent = await confirmDonation(orderId, paymentId);
+    return Response.json({ success: true, receiptSent }, { headers: { "Cache-Control": "no-store" } });
+  } catch (error) { return apiError(error, "Unable to confirm payment. Please contact us with your payment reference before trying again."); }
 }

@@ -1,27 +1,17 @@
-import { NextRequest, NextResponse } from "next/server";
+import { randomUUID } from "node:crypto";
 import { getRazorpay } from "@/lib/razorpay";
+import { apiError, readSubmission } from "@/lib/http";
+import { validateDonation } from "@/lib/validation";
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const { amount, purpose, name, email } = body as {
-      amount: number; purpose: string; name: string; email: string;
-    };
-
-    if (!amount || amount < 1) {
-      return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
-    }
-
+    const donation = validateDonation(await readSubmission(req, "donation", 10));
     const order = await getRazorpay().orders.create({
-      amount: Math.round(amount * 100), // paise
+      amount: donation.amount,
       currency: "INR",
-      receipt: `rcpt_${Date.now()}`,
-      notes: { purpose, donorName: name, donorEmail: email },
+      receipt: `gift_${randomUUID().replaceAll("-", "")}`,
+      notes: { purpose: donation.purpose, donorName: donation.name, donorEmail: donation.email },
     });
-
-    return NextResponse.json({ orderId: order.id, amount: order.amount });
-  } catch (err: unknown) {
-    console.error("Razorpay order error:", err);
-    return NextResponse.json({ error: "Order creation failed" }, { status: 500 });
-  }
+    return Response.json({ orderId: order.id, amount: order.amount, keyId: process.env.RAZORPAY_KEY_ID }, { headers: { "Cache-Control": "no-store" } });
+  } catch (error) { return apiError(error, "Unable to start payment. Please try again or contact us."); }
 }

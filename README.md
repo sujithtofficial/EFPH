@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ebenezer Ministries (EFPH)
 
-## Getting Started
+Next.js website for Ebenezer Ministries, Bengaluru. The existing church text and photo library are retained, with responsive navy, gold, and warm neutral styling.
 
-First, run the development server:
+## Development
 
-```bash
+Use Node.js 24.x and npm. The committed lockfile makes local and Vercel installs reproducible.
+
+```sh
+npm ci
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Public pages and language-specific service recordings work without credentials. Payment creation and contact delivery require the corresponding server keys. See [ENV_SETUP.md](ENV_SETUP.md).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Validation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```sh
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npm audit --omit=dev
+```
 
-## Learn More
+Security tests cover invalid donation amounts and donor details, payment/webhook signatures, captured-payment matching, contact validation and HTML escaping, request size/origin/content type, rate limits, and language-specific video selection.
 
-To learn more about Next.js, take a look at the following resources:
+## Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The existing Vercel project uses `npm ci` and Node.js 24.x. Configure the variables described in [ENV_SETUP.md](ENV_SETUP.md) and review the [audit notes](docs/site-review.md). Branch deployments should remain unindexed; the production canonical origin defaults to the supplied Vercel URL. No new hosting service is required.

@@ -1,133 +1,45 @@
-# Environment Variables Setup Guide
+# Production setup
 
-Copy `.env.local.example` or create `.env.local` in the project root with the variables below.
+Use Node.js 24.x. Copy `.env.example` to `.env.local` for local development, and add production values to the existing Vercel project. Never commit credentials.
 
----
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Canonical production origin. Defaults to the supplied live site, `https://project-njo3j.vercel.app`. Set to a custom domain only after it is connected and serving this application. |
+| `RAZORPAY_KEY_ID` | Razorpay test/live key ID. The order endpoint supplies the matching public ID to Checkout. |
+| `RAZORPAY_KEY_SECRET` | Server-only API secret used for order creation, authenticated gateway lookups, and payment signature verification. |
+| `RAZORPAY_WEBHOOK_SECRET` | Separate webhook signing secret. |
+| `RESEND_API_KEY` | Server-only email key. Verify the sending domain `ebenezerministries.in` in Resend. |
+| `YOUTUBE_TAMIL_KANNADA_PLAYLIST_ID` | Optional dedicated Tamil/Kannada playlist ID. |
+| `YOUTUBE_ENGLISH_HINDI_PLAYLIST_ID` | Optional dedicated English/Hindi playlist ID. |
 
-## 1. Razorpay (Indian Payments — ₹)
+## Indian payments
 
-| Variable | Example |
-|---|---|
-| `RAZORPAY_KEY_ID` | `rzp_test_xxxxx` / `rzp_live_xxxxx` |
-| `RAZORPAY_KEY_SECRET` | `xxxxxxxxxxxxxxxx` |
-| `NEXT_PUBLIC_RAZORPAY_KEY_ID` | Same as `RAZORPAY_KEY_ID` |
-| `RAZORPAY_WEBHOOK_SECRET` | `xxxxxxxxxxxxxxxx` |
+Only INR payments through Razorpay are supported. Stripe code, endpoints, packages, and environment variables have been removed. No public Razorpay environment variable is required.
 
-### How to get:
-1. Go to [https://dashboard.razorpay.com](https://dashboard.razorpay.com) and sign up / log in.
-2. Navigate to **Settings → API Keys → Generate Key**.
-3. Copy the **Key ID** (starts with `rzp_test_` or `rzp_live_`) and **Key Secret**.
-4. For webhooks: go to **Settings → Webhooks → Add New Webhook**.
-   - URL: `https://yourdomain.com/api/donations/razorpay`
-   - Events: `payment.captured`
-   - Copy the **Webhook Secret**.
+1. Enable the intended domestic UPI, card, and net banking methods in the Razorpay dashboard. If the account has international card acceptance enabled, disable that account-level setting to enforce domestic acceptance. An INR-only website does not itself restrict the issuer country of a card.
+2. Enable automatic payment capture. Receipts and the success response require a captured INR payment, a paid order, and matching gateway amounts and order IDs.
+3. Configure a webhook at `https://<production-host>/api/razorpay/webhook`, subscribe to `payment.captured`, and set its signing secret in Vercel as `RAZORPAY_WEBHOOK_SECRET`.
+4. Confirm the Resend sending domain. Browser verification and webhook delivery use the same payment-specific Resend idempotency key (24-hour retention). Webhooks allow email delivery to recover if a donor closes the browser. Use durable payment-event storage if permanent deduplication or an accounting ledger is needed.
+5. Exercise a Razorpay **test-mode** success, failure, cancellation, interrupted confirmation, and signed webhook before switching to live keys. Do not test with actual donations.
 
-> Use `rzp_test_` keys for development. Switch to `rzp_live_` for production.
+Missing gateway configuration returns 503 with a contact/in-person fallback. Receipt email failure does not report a captured payment as failed; the confirmation page accurately reports whether email was sent. Webhook email failures return 503 for provider retry.
 
----
+## Contact form and abuse protection
 
-## 2. Stripe (International Payments — $)
+Verify `RESEND_API_KEY` and the sender domain. Staff delivery errors produce a failure response; an optional auto-reply failure does not ask the visitor to duplicate a delivered message.
 
-| Variable | Example |
-|---|---|
-| `STRIPE_SECRET_KEY` | `sk_test_xxxxx` / `sk_live_xxxxx` |
-| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | `pk_test_xxxxx` / `pk_live_xxxxx` |
-| `STRIPE_WEBHOOK_SECRET` | `whsec_xxxxx` |
+Input types and lengths, email format, request origin, JSON content type, and body size are checked. All user values in email HTML are escaped. A hidden honeypot and bounded per-instance rate limits provide basic protection. Configure Vercel Firewall rate-limit rules for `/api/contact`, `/api/razorpay`, and `/api/razorpay/verify` for enforcement across instances. Exempt the signed webhook from browser challenge rules.
 
-### How to get:
-1. Go to [https://dashboard.stripe.com](https://dashboard.stripe.com) and sign up / log in.
-2. Navigate to **Developers → API keys**.
-3. Copy the **Publishable key** (`pk_test_...`) and **Secret key** (`sk_test_...`).
-4. For webhooks: go to **Developers → Webhooks → Add endpoint**.
-   - URL: `https://yourdomain.com/api/donations/stripe`
-   - Events: `checkout.session.completed`
-   - Copy the **Signing secret** (`whsec_...`).
+The server trusts Vercel's `x-vercel-forwarded-for` header only when running on Vercel. Other hosting platforms need their own trusted proxy configuration and shared rate limiter.
 
-> For local testing, install Stripe CLI:
-> ```bash
-> brew install stripe/stripe-cli/stripe
-> stripe login
-> stripe listen --forward-to localhost:3000/api/donations/stripe
-> ```
-> The CLI will print a `whsec_...` secret to use locally.
+## Video services
 
----
+No YouTube API key is needed or shipped to browsers. The server caches the church's public Atom feed for five minutes and finds each language's newest matching `Sunday Service` title. The player is loaded only when a visitor presses Play. A permanent **Open Live Stream** link also opens the channel’s current broadcast, including when the feed has not updated yet. The actual video's title is preserved; the page does not infer a live broadcast merely because it is Sunday or because a recording's title contains “LIVE”.
 
-## 3. Resend (Transactional Emails)
+The feed contains a limited recent window. Dedicated language playlists are recommended if Sunday recordings might fall out of that window during busy events. If no matching recording is present or YouTube is unavailable, that service retains its own YouTube search link; it never silently plays the other language.
 
-| Variable | Example |
-|---|---|
-| `RESEND_API_KEY` | `re_xxxxx` |
+## SEO and headers
 
-### How to get:
-1. Go to [https://resend.com](https://resend.com) and sign up / log in.
-2. Navigate to **API Keys → Create API Key**.
-3. Copy the key (starts with `re_`).
-4. **Domain setup** (for production): Go to **Domains → Add Domain** and add DNS records as instructed. Until verified, emails send from `onboarding@resend.dev`.
+Every public page has a title, description, canonical URL and social metadata. `/sitemap.xml` and `/robots.txt` use the configured canonical origin. Vercel previews are marked noindex. The thank-you page is noindex and omitted from the sitemap. The church schema uses existing public church details.
 
----
-
-## 4. YouTube Data API v3 (Live Stream & Videos)
-
-| Variable | Example |
-|---|---|
-| `NEXT_PUBLIC_YOUTUBE_API_KEY` | `AIzaSy...` |
-
-### How to get:
-1. Go to [https://console.cloud.google.com](https://console.cloud.google.com).
-2. Create a new project (or select existing).
-3. Navigate to **APIs & Services → Library** → search "YouTube Data API v3" → **Enable**.
-4. Go to **APIs & Services → Credentials → Create Credentials → API Key**.
-5. Copy the API key.
-6. **Recommended**: Click the key → **Restrict key** → under "API restrictions", select "YouTube Data API v3" only.
-
----
-
-## 5. App URLs
-
-| Variable | Value |
-|---|---|
-| `NEXT_PUBLIC_APP_URL` | `http://localhost:3000` (dev) / `https://yourdomain.com` (prod) |
-| `NEXT_PUBLIC_SITE_URL` | Same as above |
-
----
-
-## 6. Sanity CMS (Optional — not actively used)
-
-| Variable | Example |
-|---|---|
-| `NEXT_PUBLIC_SANITY_PROJECT_ID` | `abcd1234` |
-| `NEXT_PUBLIC_SANITY_DATASET` | `production` |
-
-Only needed if you enable the Sanity CMS integration later. Can be left as `placeholder` for now.
-
----
-
-## Complete `.env.local` Template
-
-```env
-# Razorpay
-RAZORPAY_KEY_ID=rzp_test_xxxxxxxxxxxx
-RAZORPAY_KEY_SECRET=xxxxxxxxxxxxxxxxxxxxxx
-NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_test_xxxxxxxxxxxx
-RAZORPAY_WEBHOOK_SECRET=xxxxxxxxxxxxxxxxxxxxxx
-
-# Stripe
-STRIPE_SECRET_KEY=sk_test_xxxxxxxxxxxx
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_xxxxxxxxxxxx
-STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxx
-
-# Resend
-RESEND_API_KEY=re_xxxxxxxxxxxx
-
-# Sanity (optional)
-NEXT_PUBLIC_SANITY_PROJECT_ID=placeholder
-NEXT_PUBLIC_SANITY_DATASET=production
-
-# YouTube
-NEXT_PUBLIC_YOUTUBE_API_KEY=placeholder
-
-# URLs
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-```
+The Content Security Policy restricts frame and network origins to the app, YouTube, Maps and Razorpay. Static Next.js hydration requires inline scripts under this policy; a nonce-based policy would require dynamic rendering or a different build strategy. Production does not allow `unsafe-eval`. Confirm Checkout and Maps after any provider-origin changes.

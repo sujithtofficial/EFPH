@@ -1,8 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Calendar, Clock, MapPin, ArrowRight } from "lucide-react";
 import { ASSETS } from "@/lib/assets";
 
@@ -64,9 +61,6 @@ const EVENTS = [
   },
 ];
 
-const fadeUp = { hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transition: { duration: 0.55 } } };
-const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
-
 export default function EventsPage() {
   return (
     <>
@@ -75,7 +69,7 @@ export default function EventsPage() {
         <Image src={ASSETS.eventBanner} alt="Events" fill className="object-cover" priority sizes="100vw" />
         <div className="absolute inset-0 bg-[#0f172a]/70" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-16 w-full">
-          <p className="text-[#b0925e] font-semibold uppercase tracking-widest text-sm mb-2">What's Happening</p>
+          <p className="text-[#b0925e] font-semibold uppercase tracking-widest text-sm mb-2">What&apos;s Happening</p>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white">Events</h1>
         </div>
       </section>
@@ -83,9 +77,9 @@ export default function EventsPage() {
       {/* ── Event Cards ────────────────────────────────── */}
       <section className="py-20 px-4 md:px-8 lg:px-16 bg-white">
         <div className="max-w-7xl mx-auto">
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {EVENTS.map((ev, i) => (
-              <motion.div key={i} variants={fadeUp} className="bg-white border border-gray-100 rounded-sm overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+              <div key={i} className="bg-white border border-gray-100 rounded-sm overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
                 <div className="relative h-48 overflow-hidden">
                   <Image src={ev.image} alt={ev.title} fill className={`object-cover hover:scale-105 transition-transform duration-500 ${'imagePosition' in ev ? 'object-top' : ''}`} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                   <span className="absolute top-3 left-3 bg-[#b0925e] text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
@@ -101,9 +95,9 @@ export default function EventsPage() {
                   </div>
                   <p className="text-gray-500 text-sm leading-relaxed flex-1">{ev.desc}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 

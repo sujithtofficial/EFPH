@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { CheckCircle, Heart, ArrowRight } from "lucide-react";
 
-export default function ThankYouPage() {
+export const metadata = { title: "Thank You", robots: { index: false, follow: false }, alternates: { canonical: "/give/thank-you" } };
+
+export default async function ThankYouPage({ searchParams }: { searchParams: Promise<{ receipt?: string }> }) {
+  const { receipt } = await searchParams;
   return (
     <section className="min-h-screen flex items-center justify-center bg-[#faf8f5] px-4">
       <div className="max-w-lg w-full text-center">
@@ -10,10 +13,10 @@ export default function ThankYouPage() {
         </div>
         <h1 className="text-3xl md:text-4xl font-bold text-[#0f172a] mb-4">Thank You!</h1>
         <p className="text-gray-600 leading-relaxed mb-2">
-          Your gift has been received. A confirmation receipt has been sent to your email address.
+          {receipt === "sent" ? "Your gift has been received. A confirmation receipt has been sent to your email address." : receipt === "pending" ? "Your gift has been received. We could not send your email receipt. Please contact us if you need a copy." : "Thank you for supporting Ebenezer Ministries."}
         </p>
         <p className="text-gray-500 text-sm mb-8">
-          "God is not unjust; he will not forget your work and the love you have shown him." — Hebrews 6:10
+          &quot;God is not unjust; he will not forget your work and the love you have shown him.&quot; — Hebrews 6:10
         </p>
         <div className="flex flex-wrap gap-4 justify-center">
           <Link href="/give" className="btn-gold">

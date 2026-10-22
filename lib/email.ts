@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { CHURCH } from "./church";
+import { escapeHtml } from "./validation";
 
 let _resend: Resend;
 function getResend() {
@@ -11,27 +12,20 @@ interface DonationEmailProps {
   to: string;
   donorName: string;
   amount: number;
-  currency: "INR" | "USD";
   purpose: string;
   reference: string;
-  gateway: "razorpay" | "stripe";
 }
 
 export async function sendDonationConfirmation({
   to,
   donorName,
   amount,
-  currency,
   purpose,
   reference,
-  gateway,
 }: DonationEmailProps) {
-  const formattedAmount =
-    currency === "INR"
-      ? `₹${amount.toLocaleString("en-IN")}`
-      : `$${(amount / 100).toFixed(2)}`;
-
-  await getResend().emails.send({
+  if (!process.env.RESEND_API_KEY) return false;
+  const formattedAmount = `₹${amount.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  const result = await getResend().emails.send({
     from:    `${CHURCH.shortName} <noreply@ebenezerministries.in>`,
     to:      [to],
     subject: `Thank you for your offering – ${CHURCH.shortName}`,
@@ -46,7 +40,7 @@ export async function sendDonationConfirmation({
       <p style="color:#94a3b8;margin:6px 0 0;font-size:13px;">${CHURCH.tagline}</p>
     </div>
     <div style="padding:40px;">
-      <h2 style="color:#0f172a;font-size:18px;margin:0 0 8px;">Thank you, ${donorName || "Blessed Giver"}!</h2>
+      <h2 style="color:#0f172a;font-size:18px;margin:0 0 8px;">Thank you, ${escapeHtml(donorName || "Blessed Giver")}!</h2>
       <p style="color:#475569;margin:0 0 24px;">Your offering has been received. May God bless you abundantly for your faithfulness.</p>
 
       <table style="width:100%;border-collapse:collapse;font-size:14px;">
@@ -56,15 +50,15 @@ export async function sendDonationConfirmation({
         </tr>
         <tr style="border-bottom:1px solid #f1f5f9;">
           <td style="padding:10px 0;color:#64748b;">Purpose</td>
-          <td style="padding:10px 0;color:#0f172a;text-align:right;">${purpose}</td>
+          <td style="padding:10px 0;color:#0f172a;text-align:right;">${escapeHtml(purpose)}</td>
         </tr>
         <tr style="border-bottom:1px solid #f1f5f9;">
           <td style="padding:10px 0;color:#64748b;">Reference</td>
-          <td style="padding:10px 0;color:#0f172a;font-family:monospace;text-align:right;">${reference}</td>
+          <td style="padding:10px 0;color:#0f172a;font-family:monospace;text-align:right;">${escapeHtml(reference)}</td>
         </tr>
         <tr>
           <td style="padding:10px 0;color:#64748b;">Payment Method</td>
-          <td style="padding:10px 0;color:#0f172a;text-align:right;text-transform:capitalize;">${gateway}</td>
+          <td style="padding:10px 0;color:#0f172a;text-align:right;text-transform:capitalize;">Razorpay</td>
         </tr>
       </table>
 
@@ -85,5 +79,6 @@ export async function sendDonationConfirmation({
 </body>
 </html>
     `,
-  });
+  }, { idempotencyKey: `donation/${reference}` });
+  return !result.error;
 }

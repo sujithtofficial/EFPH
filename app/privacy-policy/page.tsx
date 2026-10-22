@@ -1,11 +1,8 @@
-import { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { CHURCH } from "@/lib/church";
 
-export const metadata: Metadata = {
-  title: `Privacy Policy | ${CHURCH.shortName}`,
-  description: `Privacy policy for ${CHURCH.name}.`,
-};
+export const metadata = pageMetadata("/privacy-policy", "Privacy Policy", "Privacy Policy for Ebenezer Ministries (EFPH).");
 
 export default function PrivacyPolicyPage() {
   return (
@@ -31,7 +28,7 @@ export default function PrivacyPolicyPage() {
           <p>We may collect the following types of information:</p>
           <ul>
             <li><strong>Contact information</strong> — name, email address, and phone number when you submit a contact form or prayer request.</li>
-            <li><strong>Donation information</strong> — name, email address, and donation amount when you give online. Payment card details are processed directly by our payment partners (Razorpay and Stripe) and are never stored on our servers.</li>
+            <li><strong>Donation information</strong> — name, email address, and donation amount when you give online. Payment card details are processed directly by our payment partners (Razorpay) and are never stored on our servers.</li>
             <li><strong>Usage data</strong> — anonymised analytics data such as pages visited, browser type, and device information, collected to improve the website experience.</li>
           </ul>
 
