@@ -10,7 +10,7 @@ export const ASSETS = {
 
   /* ─── Hero / Home ─────────────────────────────────────────────────── */
   heroPoster: "/images/home/hero.jpg",
-  welcomeImage: "/images/general/DSC00053.jpg",
+  welcomeImage: "/images/newyear/DSC01120.jpg",
 
   /* ─── About ───────────────────────────────────────────────────────── */
   aboutImage: "/images/general/DSC02427.jpg",   // congregation worshipping

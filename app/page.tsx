@@ -90,7 +90,7 @@ export default function HomePage() {
           </div>
           <div className="relative pb-8 sm:pl-7">
             <div className="welcome-photo relative aspect-[5/4] overflow-hidden rounded-t-[5rem] rounded-br-2xl">
-              <Image src={ASSETS.welcomeImage} alt="People worshipping at Ebenezer Ministries" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 45vw" />
+              <Image src={ASSETS.welcomeImage} alt="Congregation worshipping during the New Year service" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 45vw" />
             </div>
             <blockquote className="scripture-card relative -mt-14 mr-7 sm:mr-14 p-6 sm:p-8">
               <Quote size={23} className="text-gold-dark mb-3" aria-hidden="true" />
