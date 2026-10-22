@@ -1,8 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { ASSETS } from "@/lib/assets";
 
@@ -51,9 +48,6 @@ const MINISTRIES = [
   },
 ];
 
-const fadeUp = { hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
-const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
-
 export default function MinistriesPage() {
   return (
     <>
@@ -71,9 +65,9 @@ export default function MinistriesPage() {
       {/* ── Ministry Grid ──────────────────────────────── */}
       <section className="py-20 px-4 md:px-8 lg:px-16 bg-[#faf8f5]">
         <div className="max-w-7xl mx-auto">
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {MINISTRIES.map((m) => (
-              <motion.div key={m.key} variants={fadeUp} className="bg-white rounded-sm overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+              <div key={m.key} className="bg-white rounded-sm overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
                 <div className="relative h-52 overflow-hidden">
                   <Image
                     src={ASSETS.ministries[m.key as keyof typeof ASSETS.ministries]}
@@ -89,9 +83,9 @@ export default function MinistriesPage() {
                   <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-4">{m.desc}</p>
                   <p className="text-[#b0925e] text-xs italic border-t border-gray-100 pt-4">{m.verse}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 

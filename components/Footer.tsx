@@ -32,7 +32,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#0a0f1e] text-gray-300">
       <div className="container-xl section-pad">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_1fr_1.3fr] gap-12">
 
           {/* Brand */}
           <div className="lg:col-span-1">
@@ -46,16 +46,16 @@ export default function Footer() {
               {CHURCH.description}
             </p>
             <div className="flex gap-3">
-              <a href={CHURCH.social.facebook} target="_blank" rel="noopener noreferrer"
-                className="w-9 h-9 rounded-sm bg-white/10 hover:bg-[#b0925e] flex items-center justify-center transition-colors">
+              <a aria-label="Facebook" href={CHURCH.social.facebook} target="_blank" rel="noopener noreferrer"
+                className="w-11 h-11 rounded-sm bg-white/10 hover:bg-[#b0925e] flex items-center justify-center transition-colors">
                 <FacebookIcon />
               </a>
-              <a href={CHURCH.social.youtube} target="_blank" rel="noopener noreferrer"
-                className="w-9 h-9 rounded-sm bg-white/10 hover:bg-[#b0925e] flex items-center justify-center transition-colors">
+              <a aria-label="YouTube" href={CHURCH.social.youtube} target="_blank" rel="noopener noreferrer"
+                className="w-11 h-11 rounded-sm bg-white/10 hover:bg-[#b0925e] flex items-center justify-center transition-colors">
                 <YoutubeIcon />
               </a>
-              <a href={CHURCH.social.instagram} target="_blank" rel="noopener noreferrer"
-                className="w-9 h-9 rounded-sm bg-white/10 hover:bg-[#b0925e] flex items-center justify-center transition-colors">
+              <a aria-label="Instagram" href={CHURCH.social.instagram} target="_blank" rel="noopener noreferrer"
+                className="w-11 h-11 rounded-sm bg-white/10 hover:bg-[#b0925e] flex items-center justify-center transition-colors">
                 <InstagramIcon />
               </a>
             </div>
@@ -113,7 +113,7 @@ export default function Footer() {
               </li>
               <li className="flex gap-3 text-sm">
                 <Phone size={16} className="text-[#b0925e] shrink-0" />
-                <a href={`tel:${CHURCH.phone}`} className="text-gray-400 hover:text-[#b0925e] transition-colors">
+                <a href={`tel:${CHURCH.phone.replace(/\s/g, "")}`} className="text-gray-400 hover:text-[#b0925e] transition-colors">
                   {CHURCH.phone}
                 </a>
               </li>

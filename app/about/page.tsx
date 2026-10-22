@@ -1,8 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
 import { ArrowRight, BookOpen, Heart, Users, Star, Shield } from "lucide-react";
 import { ASSETS } from "@/lib/assets";
 import { CHURCH } from "@/lib/church";
@@ -50,9 +47,6 @@ const CORE_BELIEFS = [
   },
 ];
 
-const fadeUp: Variants = { hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
-const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
-
 export default function AboutPage() {
   return (
     <>
@@ -77,11 +71,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 min-h-[600px]">
             {/* Left — Image */}
-            <motion.div
-              initial={{ opacity: 0, scale: 1.05 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+            <div
               className="relative h-80 lg:h-auto"
             >
               <Image
@@ -97,27 +87,19 @@ export default function AboutPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-transparent to-transparent lg:opacity-0 opacity-70" />
               {/* Subtle vignette */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e]/40 to-transparent" />
-            </motion.div>
+            </div>
 
             {/* Right — Content */}
             <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 py-16 lg:py-24">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
+              <div
               >
                 <span className="text-[#c9a96e] font-semibold tracking-widest uppercase text-xs">Our Leaders</span>
                 <h2 className="text-4xl md:text-5xl font-extrabold text-white mt-3 mb-2">Leadership</h2>
                 <div className="w-16 h-1 bg-[#c9a96e] mb-10" />
-              </motion.div>
+              </div>
 
               <div className="space-y-6">
-                <motion.div
-                  initial={{ opacity: 0, x: 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
+                <div
                   className="relative pl-6 border-l-2 border-[#c9a96e]/40"
                 >
                   <div className="absolute left-0 top-0 w-2 h-2 bg-[#c9a96e] rounded-full -translate-x-[5px]" />
@@ -125,13 +107,9 @@ export default function AboutPage() {
                   <p className="text-gray-400 text-sm leading-relaxed">
                     Pastor Joy has served as a minister of the Lord for over 30 years and is the senior Pastor of Ebenezer Ministries. He leads the Tamil and Kannada congregation. Pastor Joy is a great worship leader and has released 3 albums in Tamil.
                   </p>
-                </motion.div>
+                </div>
 
-                <motion.div
-                  initial={{ opacity: 0, x: 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.25 }}
+                <div
                   className="relative pl-6 border-l-2 border-[#c9a96e]/40"
                 >
                   <div className="absolute left-0 top-0 w-2 h-2 bg-[#c9a96e] rounded-full -translate-x-[5px]" />
@@ -139,7 +117,7 @@ export default function AboutPage() {
                   <p className="text-gray-400 text-sm leading-relaxed">
                     Sister Simi Joy is the wife of Pastor Joy and leads the English and Hindi congregation. She is a wonderful Bible teacher and is known for her in-depth teaching of the book of Revelation and the end times.
                   </p>
-                </motion.div>
+                </div>
               </div>
             </div>
           </div>
@@ -159,11 +137,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+            <div
               className="card-dark p-8 rounded-2xl"
             >
               <div className="w-12 h-12 rounded-xl bg-[#c9a96e]/15 flex items-center justify-center mb-5">
@@ -172,13 +146,9 @@ export default function AboutPage() {
               <h3 className="text-white font-bold text-xl mb-4">Our Vision</h3>
               <div className="w-8 h-0.5 bg-[#c9a96e] mb-5" />
               <p className="text-gray-400 leading-relaxed text-[15px]">{VISION}</p>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.15 }}
+            <div
               className="card-dark p-8 rounded-2xl"
             >
               <div className="w-12 h-12 rounded-xl bg-[#c9a96e]/15 flex items-center justify-center mb-5">
@@ -187,7 +157,7 @@ export default function AboutPage() {
               <h3 className="text-white font-bold text-xl mb-4">Our Mission</h3>
               <div className="w-8 h-0.5 bg-[#c9a96e] mb-5" />
               <p className="text-gray-400 leading-relaxed text-[15px]">{MISSION}</p>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -202,17 +172,12 @@ export default function AboutPage() {
             <div className="gold-bar-center" />
           </div>
 
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
+          <div
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {CORE_BELIEFS.map((b, i) => (
-              <motion.div
+              <div
                 key={i}
-                variants={fadeUp}
                 className="card-dark p-6 rounded-2xl group hover:border-[#c9a96e]/30 transition-colors"
               >
                 <div className="w-10 h-10 rounded-xl bg-[#c9a96e]/10 flex items-center justify-center text-[#c9a96e] mb-4 group-hover:bg-[#c9a96e]/20 transition-colors">
@@ -220,9 +185,9 @@ export default function AboutPage() {
                 </div>
                 <h3 className="text-white font-bold mb-2">{b.title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">{b.desc}</p>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -236,18 +201,14 @@ export default function AboutPage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {CHURCH.services.map((s, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
                 className="card-glass rounded-2xl p-5 text-center"
               >
                 <p className="eyebrow mb-1">{s.day}</p>
                 <p className="text-[#0a0f1e] font-bold text-base">{s.time}</p>
                 <p className="text-gray-500 text-xs mt-0.5">{s.lang}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
           <div className="text-center mt-10">
