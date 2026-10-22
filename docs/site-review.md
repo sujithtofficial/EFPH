@@ -12,7 +12,7 @@ The homepage now has the original autoplaying background video, three evenly spa
 
 | Finding | Result |
 | --- | --- |
-| The live page had one generic player and incompatible 9:00/11:30 service times | Two explicit choices: Tamil & Kannada, Sunday 7:15 AM IST; English & Hindi, Sunday 11:00 AM IST. Each selects its own latest matching Sunday video from the church's feed. A permanent current-broadcast link covers feed delays. |
+| The live page had one generic player and incompatible 9:00/11:30 service times | Two explicit choices: Tamil & Kannada, Sunday 7:15 AM IST; English & Hindi, Sunday 11:00 AM IST. Each uses verified YouTube broadcast state with a language-specific player and exact-video external link. No-key fallback retains feed videos with a status-unavailable notice. |
 | Any Sunday was described as “Live Now”, based on the visitor's local date | Removed date-based live assertions. Actual video titles are preserved; the page shows the selected recording and a direct YouTube fallback. |
 | International donation option and publicly callable Stripe endpoints | Removed Stripe UI, server routes, dependencies, and setup variables. Updated only the corresponding payment-provider references in policies. |
 | Payment verification accepted browser-supplied amount, recipient and purpose | HMAC verification uses constant-time comparison. Receipt details come from the authenticated Razorpay order. Captured status, order identity, INR currency, paid amount and total are verified. |
@@ -36,7 +36,7 @@ The homepage now has the original autoplaying background video, three evenly spa
 
 - `npm run lint`: passed without warnings.
 - `npm run typecheck`: passed.
-- `npm test`: 24 passed, including payment/webhook integrity, validation, email escaping, submission limits, and language-selection regressions.
+- `npm test`: 47 passed, including payment/webhook integrity, validation, email escaping, submission limits, broadcast lifecycle, archive/outage retention, API isolation, polling, concurrent refreshes, and language/playback selection.
 - Production build with Node 24.22.1: passed.
 - `npm audit --omit=dev`: zero known vulnerabilities at review time.
 - All 11 page routes checked: HTTP 200, one H1 each, route-specific canonical metadata. Removed Stripe endpoints: 404. Out-of-range YouTube query: 400.
@@ -65,4 +65,12 @@ This comparison was measured before the follow-up restoring homepage video autop
 - Resend deduplication lasts 24 hours. Permanent event deduplication or a financial ledger requires durable storage.
 - Five **development-only** npm advisories remain in the Next ESLint plugin's `fast-glob` → `micromatch` → `braces` chain. The latest published `braces` was 3.0.3 and remained affected at review time. Production dependencies audit cleanly. Avoid automated forced downgrades of the framework; update the tooling chain when an upstream fix is published.
 - The CSP permits inline scripts for static Next.js hydration. It still limits external scripts/frames/connections and forbids production eval. A nonce-only policy needs a different rendering/build strategy.
-- The public YouTube feed has a finite recent window. Optional dedicated playlists provide stable long-term language archives if Sunday recordings leave that window. Missing feeds retain a language-specific external fallback.
+- Configure the server-only `YOUTUBE_API_KEY` to enable verified broadcast status. Real-key verification remains outstanding by request. Uploads/playlists and retained per-language archive candidates cover the finite feed window; cache loss still requires rediscovery. Discovery latency and quota limits are documented in `ENV_SETUP.md`.
+
+## Sunday broadcast follow-up
+
+Replaced title/date-only selection and five-minute page ISR with server-only YouTube Data API status checks, dynamic HTML, a no-store status endpoint, and 30-second browser polling. Explicit end timestamps override stale live flags; processing archives do not become ready replays until a processed, nonzero-duration recording is available. Both service controls are present in server-rendered HTML. The active language is the default for new visitors; explicit language links and existing playback remain selected.
+
+The player, displayed metadata and external link always refer to the same video. Playlists discover candidates and provide a separate archive link. A running iframe is preserved across status changes, with an opt-in switch when a newer stream appears. Broader Sunday worship title matching, upload/playlist discovery and retained per-language replay candidates address feed-window gaps. Successful provider responses exclude deleted/private IDs; outages do not overwrite successful cached data or renew stale verification timestamps. Actual background cache refreshes coalesce concurrent requests and back off after provider failures.
+
+Validation: 47 automated tests passed; lint, typecheck and Node 24 production build passed. The built `/api/live` returned both service IDs, no-store headers, and honest unverified fallback with no key. A separate production server with a local mocked Google API and placeholder key returned verified replay/live states; four parallel warm requests made zero additional provider calls, retained the same checked timestamp, and exposed no key in JSON or server-rendered HTML. Provider requests used the key header, not a URL parameter. Desktop (1440px) and mobile (390px) checks found no horizontal overflow and confirmed both language controls and matching video links. An isolated local proxy supplied simulated upcoming/live/processing/replay/outage responses to the built app: upcoming changed to live without reload, a new visitor selected live English/Hindi, Tamil playback stayed open when English went live, and English playback stayed on the same iframe through processing/replay/outage states. This is simulation coverage, not a claim that a real YouTube API key or a future Sunday broadcast was exercised. The proxy is ignored local QA code and is not part of the deployed app. The original homepage background video is unchanged.
