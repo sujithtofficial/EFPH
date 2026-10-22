@@ -10,20 +10,12 @@ export const metadata = pageMetadata("/", CHURCH.name, CHURCH.description);
 
 const EVENTS = [
   {
-    title: "Sunday Service",
-    date: "Every Sunday",
-    time: "7:15 AM (Tamil & Kannada) | 11:00 AM (English & Hindi)",
-    venue: "Ebenezer Ministries, Bengaluru",
-    desc: "Come and experience life-changing worship and the Word of God.",
-    tag: "Weekly",
-  },
-  {
-    title: "21 Day Fasting Prayer",
-    date: "Last week of September – Second Sunday of October",
-    time: "11:30 AM – 1:30 PM & 6:00 PM – 8:30 PM",
+    title: "Youth Meeting",
+    date: "Every Last Saturday",
+    time: "6:30 PM",
     venue: "Ebenezer Ministries",
-    desc: "The congregation gathers to fast, pray and worship together as a family.",
-    tag: "Annual",
+    desc: "A vibrant gathering for young people to worship, connect, and grow together in Christ.",
+    tag: "Monthly",
   },
   {
     title: "Praise Fest",
@@ -31,6 +23,14 @@ const EVENTS = [
     time: "6:30 PM",
     venue: "Ebenezer Ministries",
     desc: "A monthly celebration of worship in song and spirit.",
+    tag: "Monthly",
+  },
+  {
+    title: "Night Prayer",
+    date: "Every 2nd Friday",
+    time: "10:30 PM – 4:00 AM",
+    venue: "Ebenezer Ministries",
+    desc: "An all-night prayer vigil — seeking the face of God through worship, intercession, and the Word.",
     tag: "Monthly",
   },
 ];
@@ -67,7 +67,7 @@ export default function HomePage() {
       </section>
 
       <section id="service-times" aria-label="Service times" className="service-strip">
-        <div className="site-width grid sm:grid-cols-3">
+        <div className="site-width grid sm:grid-cols-2">
           {CHURCH.services.map((service, index) => (
             <Link key={service.lang} href={index < 2 ? `/live?service=${index === 0 ? "tamil-kannada" : "english-hindi"}` : "/contact"} className="service-item group">
               <span className="eyebrow">{service.day}</span>
